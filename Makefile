@@ -6,7 +6,7 @@
 #    By: rofontai <rofontai@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/24 16:49:17 by rofontai          #+#    #+#              #
-#    Updated: 2023/03/16 15:31:26 by rofontai         ###   ########.fr        #
+#    Updated: 2023/03/20 08:38:12 by rofontai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,8 +33,14 @@ OBJ_C	= ${SRC_C:%.c=${OBJ_DIR}/%.o}
 CC      = gcc
 CFLAGS  = -Wall -Wextra -Werror
 
+DIR_LIBFT	= ./libft
+LIBFT		=libft.a
+
+DIR_PRINTF	= ./ft_printf
+PRINTF		= libftprintf.a
+
 #VARIABLE------------------------------------------------------------------------
-all: creat ${NAME} ${NAME_C}
+all: creat  ${NAME} ${NAME_C}
 	@echo "$GMINITALK DONE$W"
 
 $(OBJ_DIR)/%.o: %.c
@@ -44,10 +50,19 @@ serv: creat ${NAME}
 
 people: creat ${NAME_C}
 
-${NAME}: ${OBJ}
-	@${CC}  -o ${NAME} ${OBJ}
-${NAME_C}: ${OBJ_C}
-	@ar -rcs  ${NAME_C} ${OBJ_C}
+${NAME}: ${DIR_LIBFT}/${LIBFT} ${DIR_PRINTF}/${PRINTF} ${OBJ} ${SRC}
+	@echo $GSERVEUR DONE$W
+	@${CC} ${CFLAGS} ${OBJ} -o ${NAME} ${DIR_LIBFT}/${LIBFT} ${DIR_PRINTF}/${PRINTF}
+
+${NAME_C}: ${DIR_LIBFT}/${LIBFT} ${DIR_PRINTF}/${PRINTF} ${OBJ_C} ${SRC_C}
+	@echo $GCLIENT DONE$W
+	@${CC} ${CFLAGS} ${OBJ} -o ${NAME_C} ${DIR_LIBFT}/${LIBFT} ${DIR_PRINTF}/${PRINTF}
+
+${DIR_LIBFT}/${LIBFT}:
+	@make -C ${DIR_LIBFT}
+
+${DIR_PRINTF}/${PRINTF}:
+	@make -C ${DIR_PRINTF}
 
 creat:
 	@mkdir -p ${OBJ_DIR}
@@ -55,10 +70,15 @@ creat:
 clean:
 	@rm -f ${OBJ} ${OBJ_C}
 	@rm -rf ${OBJ_DIR}
+	@make clean -C ${DIR_LIBFT}
+	@echo $RCLIENT CLEAN$W
+	@echo $RSERVEUR CLEAN$W
+	@make clean -C ${DIR_PRINTF}
 	@echo "$RMINITALK CLEAN$W"
 
 fclean: clean
-	@rm -f ${NAME} ${NAME_C}
+
+	@rm -f ${NAME} ${NAME_C} ${DIR_PRINTF}/${PRINTF} ${DIR_LIBFT}/${LIBFT}
 
 re: fclean all
 

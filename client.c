@@ -6,28 +6,40 @@
 /*   By: rofontai <rofontai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 12:51:58 by rofontai          #+#    #+#             */
-/*   Updated: 2023/03/16 15:10:42 by rofontai         ###   ########.fr       */
+/*   Updated: 2023/03/20 15:02:46 by rofontai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft/libft.h"
-#include "./ft_printf/ft_printf.h"
+#include "minitalk.h"
 
-void print_bits(char c)
+void f_send_bits(int pid, char c)
 {
-	int i = 128;
+	int i;
+
+	i = 128;
 	while (i > 0)
 	{
 		if (i & c)
-			ft_printf("1\n");
+			kill(pid, SIGUSR1);
 		else
-			ft_printf("0\n");
+			kill(pid, SIGUSR2);
 		i = i >> 1;
 	}
 }
 
-int main()
+int main(int argc, char **argv)
 {
-	print_bits('a');
+	int i;
+	int pid;
+
+	i = 0;
+	if(argc == 3)
+	{
+		pid = ft_atoi(argv[1]);
+		while (argv[2][i])
+		{
+			f_send_bits(pid, argv[2][i++]);
+		}
+	}
 	return (0);
 }
