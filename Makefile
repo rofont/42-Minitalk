@@ -3,14 +3,27 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rofontai <rofontai@student.42.fr>          +#+  +:+       +#+         #
+#    By: romain <romain@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/24 16:49:17 by rofontai          #+#    #+#              #
-#    Updated: 2023/03/20 08:38:12 by rofontai         ###   ########.fr        #
+#    Updated: 2023/03/23 21:37:57 by romain           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-#COLORS------------------------------------------------------------------------
+# BANNER-----------------------------------------------------------------------
+
+define BANNER
+
+   _____   __        __  __          __   __
+  /     \ |__| ____ |__|/  |______  |  | |  | __
+ /  \ /  \|  |/    \|  \   __\__  \ |  | |  |/ /
+/    Y    \  |   |  \  ||  |  / __ \|  |_|    /__
+\____|____/__|___|__/__||__| (______/____/__|___/
+
+endef
+export
+
+# COLORS-----------------------------------------------------------------------
 
 R = $(shell tput -Txterm setaf 1)
 G = $(shell tput -Txterm setaf 2)
@@ -19,67 +32,45 @@ C = $(shell tput -Txterm setaf 6)
 Y = $(shell tput -Txterm setaf 3)
 Z = $(shell tput -Txterm setaf 5)
 
-#ARGUMENTS---------------------------------------------------------------------
+# VARIABLES--------------------------------------------------------------------
 
-NAME 	= serveur
-NAME_C	= client
+NAME	=
+SERVER	= server
+CLIENT	= client
 
-SRC		= serveur.c
+CC	= gcc
+CFLAGS	= -Wall -Wextra -Werror
+
+OBJ_SRC	= ./src
+SRC_S	= server.c
 SRC_C	= client.c
 
 OBJ_DIR	= ./obj
-OBJ		= ${SRC:%.c=${OBJ_DIR}/%.o}
-OBJ_C	= ${SRC_C:%.c=${OBJ_DIR}/%.o}
-CC      = gcc
-CFLAGS  = -Wall -Wextra -Werror
+OBJ_S	= $(SRC_S:%.c=$(OBJ_DIR)/%.o)
+OBJ_C	= $(SRC_S:.c=.o)
 
-DIR_LIBFT	= ./libft
-LIBFT		=libft.a
 
-DIR_PRINTF	= ./ft_printf
-PRINTF		= libftprintf.a
 
-#VARIABLE------------------------------------------------------------------------
-all: creat  ${NAME} ${NAME_C}
-	@echo "$GMINITALK DONE$W"
+# ARGUMENTS--------------------------------------------------------------------
 
-$(OBJ_DIR)/%.o: %.c
-	@$(CC) $(CFLAGS) -c $< -o $@
+$(OBJ_DIR)/%.o : $(OBJ_SRC)/%.c
+	$(CC) $(CFLAGS) -o $@ -c $<
 
-serv: creat ${NAME}
+all : creat $(SERVER)
+	@echo $G"$$BANNER"$W
 
-people: creat ${NAME_C}
+$(SERVER) : $(OBJ_S)
+	$(CC) $(CFLAGS) -o $@ $^
 
-${NAME}: ${DIR_LIBFT}/${LIBFT} ${DIR_PRINTF}/${PRINTF} ${OBJ} ${SRC}
-	@echo $GSERVEUR DONE$W
-	@${CC} ${CFLAGS} ${OBJ} -o ${NAME} ${DIR_LIBFT}/${LIBFT} ${DIR_PRINTF}/${PRINTF}
 
-${NAME_C}: ${DIR_LIBFT}/${LIBFT} ${DIR_PRINTF}/${PRINTF} ${OBJ_C} ${SRC_C}
-	@echo $GCLIENT DONE$W
-	@${CC} ${CFLAGS} ${OBJ} -o ${NAME_C} ${DIR_LIBFT}/${LIBFT} ${DIR_PRINTF}/${PRINTF}
+creat :
+	mkdir -p $(OBJ_DIR)
 
-${DIR_LIBFT}/${LIBFT}:
-	@make -C ${DIR_LIBFT}
+clean :
+	rm -rf $(OBJ_S) $(OBJ_DIR)
 
-${DIR_PRINTF}/${PRINTF}:
-	@make -C ${DIR_PRINTF}
+fclean : clean
+	rm -f $(SERVER)
 
-creat:
-	@mkdir -p ${OBJ_DIR}
-
-clean:
-	@rm -f ${OBJ} ${OBJ_C}
-	@rm -rf ${OBJ_DIR}
-	@make clean -C ${DIR_LIBFT}
-	@echo $RCLIENT CLEAN$W
-	@echo $RSERVEUR CLEAN$W
-	@make clean -C ${DIR_PRINTF}
-	@echo "$RMINITALK CLEAN$W"
-
-fclean: clean
-
-	@rm -f ${NAME} ${NAME_C} ${DIR_PRINTF}/${PRINTF} ${DIR_LIBFT}/${LIBFT}
-
-re: fclean all
-
-.PHONY: all clean fclean re creat
+re : fclean all
+.PHONY: all clean creat fclean re
