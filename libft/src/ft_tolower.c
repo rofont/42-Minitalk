@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/23 20:39:44 by romain            #+#    #+#             */
-/*   Updated: 2023/03/24 14:21:38 by romain           ###   ########.fr       */
+/*   Created: 2022/10/20 16:19:07 by romainfonta       #+#    #+#             */
+/*   Updated: 2023/03/24 11:30:42 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "../include/libft.h"
 
-
-# include "../libft/include/libft.h"
-# include "../ft_printf/ft_printf.h"
-# include <stdio.h>
-# include <stdlib.h>
-
-
-
-
-
-#endif
+/*FT_TOLOWER convert an c uppercase to a c lowercaase*/
+int	ft_tolower(int c)
+{
+	if (c >= 65 && c <= 90)
+		return (c + 32);
+	return (c);
+}

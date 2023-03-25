@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/23 20:39:44 by romain            #+#    #+#             */
-/*   Updated: 2023/03/24 14:21:38 by romain           ###   ########.fr       */
+/*   Created: 2022/11/10 11:29:39 by rofontai          #+#    #+#             */
+/*   Updated: 2023/03/24 11:29:33 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "../include/libft.h"
 
+/*FT_LSTNEW allocate memory with malloc and return a new element.
+	The member variable content is initialized using the value of the parameter
+	(content). The 'next' variable is initialized to NULL*/
+t_list	*ft_lstnew(void *content)
+{
+	t_list	*i;
 
-# include "../libft/include/libft.h"
-# include "../ft_printf/ft_printf.h"
-# include <stdio.h>
-# include <stdlib.h>
-
-
-
-
-
-#endif
+	i = malloc(sizeof(t_list));
+	if (!i)
+		return (NULL);
+	i->content = content;
+	i->next = NULL;
+	return (i);
+}

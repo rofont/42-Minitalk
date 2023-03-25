@@ -6,7 +6,7 @@
 #    By: romain <romain@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/24 16:49:17 by rofontai          #+#    #+#              #
-#    Updated: 2023/03/23 21:37:57 by romain           ###   ########.fr        #
+#    Updated: 2023/03/24 21:26:15 by romain           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,43 +34,70 @@ Z = $(shell tput -Txterm setaf 5)
 
 # VARIABLES--------------------------------------------------------------------
 
-NAME	=
+NAME	= minitalk
 SERVER	= server
 CLIENT	= client
 
-CC	= gcc
+CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror
+RM		= rm -rf
 
-OBJ_SRC	= ./src
+DIR_SRC	= ./src
 SRC_S	= server.c
 SRC_C	= client.c
 
-OBJ_DIR	= ./obj
-OBJ_S	= $(SRC_S:%.c=$(OBJ_DIR)/%.o)
-OBJ_C	= $(SRC_S:.c=.o)
+DIR_OBJ	= ./obj
+OBJ_S	= $(addprefix $(DIR_OBJ)/, $(SRC_S:.c=.o))
+OBJ_C	= $(addprefix $(DIR_OBJ)/, $(SRC_C:.c=.o))
 
+INC		= -I inc
+
+DIR_LIBFT	= ./libft
+LIBFT	= $(DIR_LIBFT)/libft.a
+
+DIR_PRINTF	= ./ft_printf
+PRINTF	= $(DIR_PRINTF)/libftprintf.a
 
 
 # ARGUMENTS--------------------------------------------------------------------
 
-$(OBJ_DIR)/%.o : $(OBJ_SRC)/%.c
-	$(CC) $(CFLAGS) -o $@ -c $<
-
-all : creat $(SERVER)
+all : $(SERVER) $(CLIENT)
 	@echo $G"$$BANNER"$W
+	@echo "\n#-----$C MINITALK already$W ✅---------------#\n"
 
-$(SERVER) : $(OBJ_S)
-	$(CC) $(CFLAGS) -o $@ $^
+$(DIR_OBJ)/%.o : $(DIR_SRC)/%.c $(DIR_OBJ)
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@echo "$G Compilation : $Z $<"$W
+
+$(SERVER): $(OBJ_S) $(LIBFT) $(PRINTF)
+	@$(CC) $(OBJ_S) -o $@ $(PRINTF) $(LIBFT)
+
+$(CLIENT): $(OBJ_C) $(LIBFT) $(PRINTF)
+	@$(CC) $(OBJ_C) -o $@ $(PRINTF) $(LIBFT)
 
 
-creat :
-	mkdir -p $(OBJ_DIR)
+$(DIR_OBJ) :
+	@mkdir -p $@
+
+$(LIBFT) :
+	@make -C $(DIR_LIBFT)
+
+$(PRINTF) :
+	@make -C $(DIR_PRINTF)
 
 clean :
-	rm -rf $(OBJ_S) $(OBJ_DIR)
-
+	@$(RM) $(DIR_OBJ)
+	@make clean -C $(DIR_LIBFT)
+	@make clean -C $(DIR_PRINTF)
+	@echo "\n#-----$R MINITALK clean$W ❌---------------#\n"
 fclean : clean
-	rm -f $(SERVER)
+	@rm -f $(SERVER) $(CLIENT)
+	@make fclean -C $(DIR_LIBFT)
+	@make fclean -C $(DIR_PRINTF)
+	@echo "\n#-----$R MINITALK all clean$W ❌-----------#\n"
 
 re : fclean all
+
 .PHONY: all clean creat fclean re
+
+# DIVERS-----------------------------------------------------------------------

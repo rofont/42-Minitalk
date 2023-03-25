@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/23 20:39:44 by romain            #+#    #+#             */
-/*   Updated: 2023/03/24 14:21:38 by romain           ###   ########.fr       */
+/*   Created: 2022/11/11 15:50:23 by rofontai          #+#    #+#             */
+/*   Updated: 2023/03/24 11:29:24 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "../include/libft.h"
 
-
-# include "../libft/include/libft.h"
-# include "../ft_printf/ft_printf.h"
-# include <stdio.h>
-# include <stdlib.h>
-
-
-
-
-
-#endif
+/*FTT_LSTITER iterates over the 'lst' list and applies
+	the 'f' function to content each element.*/
+void	ft_lstiter(t_list *lst, void (*f)(void *))
+{
+	if (!lst)
+		return ;
+	while (lst)
+	{
+		f(lst->content);
+		lst = lst->next;
+	}
+}

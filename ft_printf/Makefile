@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rofontai <rofontai@student.42.fr>          +#+  +:+       +#+         #
+#    By: romain <romain@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 11:36:23 by rofontai          #+#    #+#              #
-#    Updated: 2023/03/14 13:08:34 by rofontai         ###   ########.fr        #
+#    Updated: 2023/03/24 21:17:09 by romain           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,10 +36,11 @@ CFLAGS	= -Wall -Wextra -Werror
 
 #VARIABLE----------------------------------------------------------------------
 all: creat ${NAME}
-	@echo "$GFT_PRINTF DONE$W"
+	@echo "\n#-----$CFT_PRINTF already$W ✅---------------#\n"
 
 $(OBJ_DIR)/%.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
+	@echo "$G Compilation : $Z $<"$W
 
 ${NAME}: ${OBJS}
 	@ar -rcs  ${NAME} ${OBJS}
@@ -50,10 +51,10 @@ creat:
 clean:
 	@rm -f ${OBJS}
 	@rm -rf ${OBJ_DIR}
-	@echo "$RFT_PRINTF CLEAN$W"
-
+	@echo "\n#-----$R FT_PRINTF clean$W ❌--------------#\n"
 fclean: clean
 	@rm -f ${NAME}
+	@echo "\n#-----$R FT_PRINTF full clean$W ❌---------#\n"
 
 re: fclean all
 

@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/23 20:39:44 by romain            #+#    #+#             */
-/*   Updated: 2023/03/24 14:21:38 by romain           ###   ########.fr       */
+/*   Created: 2022/10/21 08:43:01 by romainfonta       #+#    #+#             */
+/*   Updated: 2023/03/24 11:29:43 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "../include/libft.h"
 
+/*FT_MEMCMP copies n of src in dest.*/
+void	*ft_memcpy(void *dest, const void *src, size_t n)
+{
+	size_t	i;
+	char	*d;
+	char	*s;
 
-# include "../libft/include/libft.h"
-# include "../ft_printf/ft_printf.h"
-# include <stdio.h>
-# include <stdlib.h>
-
-
-
-
-
-#endif
+	if (!dest || !src)
+		return (dest);
+	d = (char *)dest;
+	s = (char *)src;
+	i = 0;
+	while (i < n)
+	{
+		d[i] = s[i];
+		i++;
+	}
+	return (dest);
+}

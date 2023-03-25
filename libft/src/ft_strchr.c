@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/23 20:39:44 by romain            #+#    #+#             */
-/*   Updated: 2023/03/24 14:21:38 by romain           ###   ########.fr       */
+/*   Created: 2022/10/21 15:53:09 by romainfonta       #+#    #+#             */
+/*   Updated: 2023/03/24 11:30:05 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "../include/libft.h"
 
+/*FT_STRCHR finds the first occurrence of the character passed (c)
+	in specific character string(s).*/
+char	*ft_strchr(const char *s, int c)
+{
+	int		i;
+	char	t;
 
-# include "../libft/include/libft.h"
-# include "../ft_printf/ft_printf.h"
-# include <stdio.h>
-# include <stdlib.h>
-
-
-
-
-
-#endif
+	if (!s)
+		return (0);
+	i = 0;
+	t = c;
+	while (s[i] != t)
+	{
+		if (s[i] == '\0')
+			return (0);
+		i++;
+	}
+	return ((char *)&s[i]);
+}

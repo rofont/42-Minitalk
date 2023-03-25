@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/23 20:39:44 by romain            #+#    #+#             */
-/*   Updated: 2023/03/24 14:21:38 by romain           ###   ########.fr       */
+/*   Created: 2022/10/24 16:19:36 by rofontai          #+#    #+#             */
+/*   Updated: 2023/03/24 11:29:38 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "../include/libft.h"
 
+/*FT_MEMCHR finds the first occurrence of c in s.
+	We also need to specify to the function the size of the memory block
+	in which to search.*/
+void	*ft_memchr(const void *s, int c, size_t n)
+{
+	size_t		i;
+	char		*temp;
 
-# include "../libft/include/libft.h"
-# include "../ft_printf/ft_printf.h"
-# include <stdio.h>
-# include <stdlib.h>
-
-
-
-
-
-#endif
+	if (!s)
+		return (0);
+	temp = (char *)s;
+	i = 0;
+	while (i < n)
+	{
+		if (temp[i] == (char)c)
+			return (&temp[i]);
+		i++;
+	}
+	return (0);
+}
