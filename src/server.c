@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rofontai <rofontai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 20:39:08 by romain            #+#    #+#             */
-/*   Updated: 2023/03/27 16:45:57 by romain           ###   ########.fr       */
+/*   Updated: 2023/04/03 13:12:57 by rofontai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,18 @@
 
 void	f_handler_recep(int sign)
 {
-	static int i;
-	static int bit;
+	static unsigned char c = 0;
+	static int nb_bit = 0;
 
-	i = 0;
-	bit = 0;
-	if (sign == SIGUSR1)
-		{
-			i |= (i << bit);
-			bit++;
-			ft_printf("j'ai recu 1\n");
-		}
-	if (bit == 8)
+	c <<= 1;
+	c |= (sign == SIGUSR1);
+	nb_bit++;
+	if (nb_bit == 8)
 	{
-		ft_printf("%c\n", i);
-		bit = 0;
-		i = 0;
+		ft_printf("%c\n", c);
+		nb_bit = 0;
+		c = 0;
 	}
-	// if (sign == SIGUSR2)
-	// 	ft_printf("J'ai recu 0\n");
-	if (sign != SIGUSR1 && sign != SIGUSR2)
-		ft_printf("J'ai recu quelque chsoe de bizzare\n");
 }
 
 
@@ -53,7 +44,6 @@ int main(int argc, char **argv)
 	}
 	sigaction(SIGUSR1, &sa_hand, NULL);
 	sigaction(SIGUSR2, &sa_hand, NULL);
-	ft_printf("%d\n", SA_SIGINFO);
 	ft_printf(G "Le pid est : %d\n"W , getpid());
 	while(argc == 1)
 	{
