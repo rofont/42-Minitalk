@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rofontai <rofontai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 20:39:08 by romain            #+#    #+#             */
-/*   Updated: 2023/04/06 12:11:49 by rofontai         ###   ########.fr       */
+/*   Updated: 2023/04/07 08:37:16 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,7 @@ static void f_handler(int sign, siginfo_t *info, void *ucontext)
 		ft_printf("SIG2 ok \n");
 		ft_printf("%d\n", info->si_pid);
 	}
-
-
 }
-
-
-
 
 int main(int argc, char **argv)
 {

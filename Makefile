@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rofontai <rofontai@student.42.fr>          +#+  +:+       +#+         #
+#    By: romain <romain@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/24 16:49:17 by rofontai          #+#    #+#              #
-#    Updated: 2023/04/05 14:12:00 by rofontai         ###   ########.fr        #
+#    Updated: 2023/04/07 08:41:15 by romain           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ DIR_OBJ	= ./obj
 OBJ_S	= $(addprefix $(DIR_OBJ)/, $(SRC_S:.c=.o))
 OBJ_C	= $(addprefix $(DIR_OBJ)/, $(SRC_C:.c=.o))
 
-INC		= -I inc
+INC		= -I include
 
 DIR_LIBFT	= ./libft
 LIBFT	= $(DIR_LIBFT)/libft.a
@@ -61,18 +61,18 @@ PRINTF	= $(DIR_PRINTF)/libftprintf.a
 
 # ARGUMENTS--------------------------------------------------------------------
 
-all : $(SERVER) $(CLIENT)
+all	:	$(CLIENT) $(SERVER)
 	@echo $G"$$BANNER"$W
 	@echo "\n#-----$C MINITALK already$W ✅---------------#\n"
 
-$(DIR_OBJ)/%.o : $(DIR_SRC)/%.c $(DIR_OBJ)
+$(DIR_OBJ)/%.o	:	$(DIR_SRC)/%.c
 	@$(CC) $(CFLAGS) -c $< -o $@
-	@echo "$G Compilation : $Z $<"$W
+	@echo "$G Compilation : $Z $(notdir $<)"$W
 
-$(SERVER): $(OBJ_S) $(LIBFT) $(PRINTF)
+$(SERVER)	:	$(LIBFT) $(PRINTF) $(OBJ_S)
 	@$(CC) $(OBJ_S) -o $@ $(PRINTF) $(LIBFT)
 
-$(CLIENT): $(OBJ_C) $(LIBFT) $(PRINTF)
+$(CLIENT)	:	$(DIR_OBJ) $(LIBFT) $(PRINTF) $(OBJ_C)
 	@$(CC) $(OBJ_C) -o $@ $(PRINTF) $(LIBFT)
 
 
