@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minitalk.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rofontai <rofontai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 20:39:44 by romain            #+#    #+#             */
-/*   Updated: 2023/04/05 13:10:32 by rofontai         ###   ########.fr       */
+/*   Updated: 2023/04/09 17:33:18 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,19 @@
 # define C "\x1B[36m"
 # define B "\x1B[30m"
 
+
+// STRUCTURE-------------------------------------------------------------------
+
 typedef struct	s_recept
 {
-	char	*msg;
-	int		index;
-	size_t	len;
-	pid_t	pid_s;
-	pid_t	pid_c;
+	char			*msg;
+	unsigned char	box;
+	size_t			bit;
+	pid_t			pid_c;
 }			t_recept;
+
+// UTILS-----------------------------------------------------------------------
+
+t_recept *f_init(int pid);
 
 #endif

@@ -3,28 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rofontai <rofontai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 14:20:02 by romain            #+#    #+#             */
-/*   Updated: 2023/04/06 12:09:02 by rofontai         ###   ########.fr       */
+/*   Updated: 2023/04/09 10:23:12 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minitalk.h"
 
 
-static void f_handler(int sign, siginfo_t *info, void *ucontext)
+static void f_handler(int sign, siginfo_t *info, void *ucontext_t)
 {
-	(void)ucontext;
+	(void)ucontext_t;
 	if (sign == SIGUSR1)
 	{
-		ft_printf("SIG1 ok\n");
-		ft_printf("%d\n", info->si_pid);
+		printf("SIG1 ok\n");
+		printf("%d\n", info->si_pid);
 	}
 	if (sign == SIGUSR2)
 	{
-		ft_printf("SIG2 ok \n");
-		ft_printf("%d\n", info->si_pid);
+		printf("SIG2 ok \n");
+		printf("%d\n", info->si_pid);
 		exit(EXIT_SUCCESS);
 	}
 }
@@ -35,25 +35,23 @@ int main(int argc, char **argv)
 	sa_ha.sa_sigaction = f_handler;
 	if (argc != 3)
 	{
-		ft_printf( "🚨"R" Error "W": Arguments = EXE, PID_SERVER, MESSAGE \n");
-		return (0);
+		printf( "🚨"R" Error "W": Need arguments ./client <PID> <MESSAGE> \n");
+		exit(EXIT_FAILURE);
 	}
 	sigaction(SIGUSR1, &sa_ha, NULL);
 	sigaction(SIGUSR2, &sa_ha, NULL);
-	ft_printf("%d, %s, ok\n", ft_atoi(argv[1]), argv[2]);
+	printf("%d, %s, ok\n", ft_atoi(argv[1]), argv[2]);
 	if (ft_strlen(argv[2]) == 1)
 	{
 		kill(ft_atoi(argv[1]), SIGUSR1);
-		ft_printf("%d\n", getpid());
+		printf("%d\n", getpid());
 	}
 	else
 	{
 		kill(ft_atoi(argv[1]), SIGUSR2);
-		ft_printf("%d\n", getpid());
+		printf("%d\n", getpid());
 	}
 	while(1)
-	{
 		pause();
-	}
 	return (0);
 }

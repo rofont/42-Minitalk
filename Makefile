@@ -6,7 +6,7 @@
 #    By: romain <romain@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/24 16:49:17 by rofontai          #+#    #+#              #
-#    Updated: 2023/04/07 08:41:15 by romain           ###   ########.fr        #
+#    Updated: 2023/04/09 14:00:19 by romain           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ CFLAGS	= -Wall -Wextra -Werror
 RM		= rm -rf
 
 DIR_SRC	= ./src
-SRC_S	= server.c
+SRC_S	= server.c utils.c
 SRC_C	= client.c
 
 DIR_OBJ	= ./obj
@@ -73,7 +73,7 @@ $(SERVER)	:	$(LIBFT) $(PRINTF) $(OBJ_S)
 	@$(CC) $(OBJ_S) -o $@ $(PRINTF) $(LIBFT)
 
 $(CLIENT)	:	$(DIR_OBJ) $(LIBFT) $(PRINTF) $(OBJ_C)
-	@$(CC) $(OBJ_C) -o $@ $(PRINTF) $(LIBFT)
+	@$(CC) $(OBJ_C) -o $@ $(PRINTF) $(LIBFT) -fsanitize=address
 
 
 $(DIR_OBJ) :

@@ -15,30 +15,7 @@ Serveur
 // 	}
 // }
 
-
-
-// int main(int argc, char **argv)
-// {
-// 	(void)argv;
-// 	struct sigaction sa_hand;
-// 	sa_hand.sa_flags = SA_SIGINFO;
-// 	sa_hand.sa_handler = f_handler_recep;
-// 	if (argc > 1)
-// 	{
-// 		ft_printf(R "Error : There are too many arguments \n");
-// 		return (0);
-// 	}
-// 	sigaction(SIGUSR1, &sa_hand, NULL);
-// 	sigaction(SIGUSR2, &sa_hand, NULL);
-// 	ft_printf(G "Le pid est : %d\n"W , getpid());
-// 	while(argc == 1)
-// 	{
-// 		pause();
-// 	}
-// 	return (0);
-// }
-
-Client
+Cliet
 // void f_send_bits(int pid, char c)
 // {
 // 	int i;
@@ -55,20 +32,3 @@ Client
 // 	}
 // }
 
-// int main(int argc, char **argv)
-// {
-// 	int i;
-// 	int pid;
-
-// 	i = 0;
-// 	if(argc == 3)
-// 	{
-
-// 		pid = ft_atoi(argv[1]);
-// 		while (argv[2][i])
-// 		{
-// 			f_send_bits(pid, argv[2][i++]);
-// 		}
-// 	}
-// 	return (0);
-// }
