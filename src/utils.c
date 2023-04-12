@@ -6,7 +6,7 @@
 /*   By: rofontai <rofontai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 13:47:38 by romain            #+#    #+#             */
-/*   Updated: 2023/04/12 14:06:04 by rofontai         ###   ########.fr       */
+/*   Updated: 2023/04/12 14:23:57 by rofontai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char *f_re_calloc(char *str, int buf)
 	int i;
 
 	i = 0;
-	new = ft_calloc(sizeof(char), buf*2);
+	new = ft_calloc(sizeof(char), buf);
 	if (!new)
 		return (NULL);
 	while (str[i])
@@ -79,21 +79,18 @@ char *f_stock_char(char *str, char c)
 {
 	static int i;
 	static	int buff;
-	static	int size;
-
 
 	if (!str)
 	{
 		i = 0;
-		size = 0;
 		buff = 2;
 		str = ft_calloc(sizeof(char), buff);
 	}
 	str[i++] = c;
-	if (++size == buff)
+	if (i == buff)
 	{
-		str = f_re_calloc(str, buff);
 		buff *= 2;
+		str = f_re_calloc(str, buff);
 	}
 	return (str);
 }

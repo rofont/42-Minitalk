@@ -6,7 +6,7 @@
 /*   By: rofontai <rofontai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 20:39:08 by romain            #+#    #+#             */
-/*   Updated: 2023/04/12 14:07:19 by rofontai         ###   ########.fr       */
+/*   Updated: 2023/04/12 14:17:55 by rofontai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static void f_handler_serv(int sign, siginfo_t *info, void *ucontext_t)
 	(void)ucontext_t;
 	static t_serv	*recup;
 
+	printf("pid_si : %d", info->si_pid);
+	fflush(stdout);
 	if (!recup)
 		recup = f_init_serv(info->si_pid);
 	if (sign == SIGUSR2)
@@ -31,7 +33,10 @@ static void f_handler_serv(int sign, siginfo_t *info, void *ucontext_t)
 		}
 		else
 		{
+			recup->msg = f_stock_char(recup->msg, recup->box);
 			printf("%s\n", recup->msg);
+			free(recup->msg);
+			recup->msg = NULL;
 			kill(info->si_pid, SIGUSR1);
 		}
 		recup->box = 0;
