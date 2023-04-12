@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minitalk.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rofontai <rofontai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 20:39:44 by romain            #+#    #+#             */
-/*   Updated: 2023/04/11 22:12:02 by romain           ###   ########.fr       */
+/*   Updated: 2023/04/12 12:59:04 by rofontai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_client
 {
 	char	*msg;
 	int		index;
-	size_t	len;
+	int		len;
 	size_t	bits;
 	pid_t	pid_c;
 	pid_t	pid_s;
@@ -56,7 +56,7 @@ typedef struct s_client
 t_serv		*f_init_serv(int pid);
 t_client	*f_init_client(char *pid, char *str);
 void		f_msg_received(t_client *sent);
-char		*f_re_malloc(char *str, int buf);
-t_serv		*f_stock_char(t_serv *recup);
+char		*f_re_calloc(char *str, int buf);
+char 		*f_stock_char(char *str, char c);
 
 #endif

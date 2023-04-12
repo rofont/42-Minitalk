@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rofontai <rofontai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 13:47:38 by romain            #+#    #+#             */
-/*   Updated: 2023/04/11 21:52:37 by romain           ###   ########.fr       */
+/*   Updated: 2023/04/12 14:06:04 by rofontai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,20 @@ t_serv *f_init_serv(int pid)
 
 t_client *f_init_client(char *pid, char *str)
 {
-	t_client *init;
+	static t_client *init;
 
-	init = ft_calloc(sizeof(t_client), 1);
-	if (!init)
-		return (0);
-	init->index = 0;
-	init->bits = 0;
-	init->msg = ft_strdup(str);
-	init->len = ft_strlen(str);
-	init->pid_c = getpid();
-	init->pid_s = ft_atoi(pid);
+	if(!init)
+	{
+		init = ft_calloc(sizeof(t_client), 1);
+		if (!init)
+			return (0);
+		init->index = 0;
+		init->bits = 0;
+		init->msg = ft_strdup(str);
+		init->len = ft_strlen(str);
+		init->pid_c = getpid();
+		init->pid_s = ft_atoi(pid);
+	}
 	return (init);
 }
 
@@ -53,13 +56,13 @@ void f_msg_received(t_client *sent)
 	exit(EXIT_SUCCESS);
 }
 
-char *f_re_malloc(char *str, int buf)
+char *f_re_calloc(char *str, int buf)
 {
 	char *new;
 	int i;
 
 	i = 0;
-	new =ft_calloc(sizeof(char), buf);
+	new = ft_calloc(sizeof(char), buf*2);
 	if (!new)
 		return (NULL);
 	while (str[i])
@@ -72,17 +75,25 @@ char *f_re_malloc(char *str, int buf)
 	return (new);
 }
 
-t_serv *f_stock_char(t_serv *recup)
+char *f_stock_char(char *str, char c)
 {
-	if (!recup->msg)
-		recup->msg = ft_calloc(sizeof(char), recup->buf);
-			if (!recup->msg)
-				return (0);
-	if (recup->index == recup->buf)
+	static int i;
+	static	int buff;
+	static	int size;
+
+
+	if (!str)
 	{
-		recup->buf *= 2;
-		recup->msg = f_re_malloc(recup->msg, recup->buf);
+		i = 0;
+		size = 0;
+		buff = 2;
+		str = ft_calloc(sizeof(char), buff);
 	}
-	recup->msg[recup->index] = recup->box;
-	return (recup);
+	str[i++] = c;
+	if (++size == buff)
+	{
+		str = f_re_calloc(str, buff);
+		buff *= 2;
+	}
+	return (str);
 }
