@@ -6,7 +6,7 @@
 #    By: romain <romain@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/24 16:49:17 by rofontai          #+#    #+#              #
-#    Updated: 2023/04/09 14:00:19 by romain           ###   ########.fr        #
+#    Updated: 2023/04/11 22:11:03 by romain           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ RM		= rm -rf
 
 DIR_SRC	= ./src
 SRC_S	= server.c utils.c
-SRC_C	= client.c
+SRC_C	= client.c utils.c
 
 DIR_OBJ	= ./obj
 OBJ_S	= $(addprefix $(DIR_OBJ)/, $(SRC_S:.c=.o))

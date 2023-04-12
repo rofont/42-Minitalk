@@ -6,7 +6,7 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 20:39:44 by romain            #+#    #+#             */
-/*   Updated: 2023/04/09 17:33:18 by romain           ###   ########.fr       */
+/*   Updated: 2023/04/11 22:12:02 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,33 @@
 
 // STRUCTURE-------------------------------------------------------------------
 
-typedef struct	s_recept
+typedef struct	s_serv
 {
 	char			*msg;
+	int				index;
 	unsigned char	box;
-	size_t			bit;
+	size_t			bits;
+	int				buf;
 	pid_t			pid_c;
-}			t_recept;
+}					t_serv;
+
+typedef struct s_client
+{
+	char	*msg;
+	int		index;
+	size_t	len;
+	size_t	bits;
+	pid_t	pid_c;
+	pid_t	pid_s;
+}			t_client;
+
 
 // UTILS-----------------------------------------------------------------------
 
-t_recept *f_init(int pid);
+t_serv		*f_init_serv(int pid);
+t_client	*f_init_client(char *pid, char *str);
+void		f_msg_received(t_client *sent);
+char		*f_re_malloc(char *str, int buf);
+t_serv		*f_stock_char(t_serv *recup);
 
 #endif

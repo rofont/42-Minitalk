@@ -6,42 +6,38 @@
 /*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 20:39:08 by romain            #+#    #+#             */
-/*   Updated: 2023/04/09 14:55:53 by romain           ###   ########.fr       */
+/*   Updated: 2023/04/11 21:59:54 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minitalk.h"
 
 
-static void f_handler(int sign, siginfo_t *info, void *ucontext_t)
+static void f_handler_serv(int sign, siginfo_t *info, void *ucontext_t)
 {
 	(void)ucontext_t;
+	static t_serv	*recup;
+
+	if (!recup)
+		recup = f_init_serv(info->si_pid);
 	if (sign == SIGUSR1)
-	{
-		printf("SIG1 ok\n");
-		printf("%d\n", info->si_pid);
-		kill(info->si_pid, SIGUSR2);
-		exit(EXIT_SUCCESS);
-	}
+
 	if (sign == SIGUSR2)
-	{
-		printf("SIG2 ok \n");
-		printf("%d\n", info->si_pid);
-	}
 }
 
 int main(int argc, char **argv)
 {
 	(void)argv;
-	struct sigaction sa_hand;
-	sa_hand.sa_sigaction = f_handler;
+	struct sigaction sa_serv;
+
 	if (argc > 1)
 	{
 		printf( "🚨"R" Error "W": No argument needed \n");
 		exit(EXIT_FAILURE);
 	}
-	sigaction(SIGUSR1, &sa_hand, NULL);
-	sigaction(SIGUSR2, &sa_hand, NULL);
+	sa_serv.sa_sigaction = f_handler_serv;
+	sigaction(SIGUSR1, &sa_serv, NULL);
+	sigaction(SIGUSR2, &sa_serv, NULL);
 	printf(G "Le pid est : %d\n"W , getpid());
 	while(1)
 		pause();
