@@ -6,7 +6,7 @@
 #    By: romain <romain@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/24 16:49:17 by rofontai          #+#    #+#              #
-#    Updated: 2023/04/07 08:35:37 by romain           ###   ########.fr        #
+#    Updated: 2023/04/12 21:31:56 by romain           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ ${OBJS_DIR}/%.o: ${SRCS_DIR}/%.c
 	@echo "$G Compilation : $Z $(notdir $<)"$W
 
 all: creat ${NAME}
-	@echo "\n#-----$CLIBFT already$W ✅-------------------#\n"
+	@echo "\n#-----$CLIBFT ready$W ✅-------------------#\n"
 
 ${NAME}: ${OBJS}
 	@ar -rsc  ${NAME} ${OBJS}
@@ -62,7 +62,7 @@ clean:
 
 fclean: clean
 	@rm -f ${NAME}
-	@echo "\n#-----$RLIBFT full clean$W ❌--------------#\n"
+	@echo "\n#-----$RLIBFT all clean$W ❌---------------#\n"
 
 re: fclean all
 

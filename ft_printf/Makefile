@@ -6,7 +6,7 @@
 #    By: romain <romain@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 11:36:23 by rofontai          #+#    #+#              #
-#    Updated: 2023/03/24 21:17:09 by romain           ###   ########.fr        #
+#    Updated: 2023/04/12 21:32:11 by romain           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ CFLAGS	= -Wall -Wextra -Werror
 
 #VARIABLE----------------------------------------------------------------------
 all: creat ${NAME}
-	@echo "\n#-----$CFT_PRINTF already$W ✅---------------#\n"
+	@echo "\n#-----$CFT_PRINTF ready$W ✅---------------#\n"
 
 $(OBJ_DIR)/%.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
@@ -54,7 +54,7 @@ clean:
 	@echo "\n#-----$R FT_PRINTF clean$W ❌--------------#\n"
 fclean: clean
 	@rm -f ${NAME}
-	@echo "\n#-----$R FT_PRINTF full clean$W ❌---------#\n"
+	@echo "\n#-----$R FT_PRINTF all clean$W ❌----------#\n"
 
 re: fclean all
 

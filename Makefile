@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rofontai <rofontai@student.42.fr>          +#+  +:+       +#+         #
+#    By: romain <romain@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/24 16:49:17 by rofontai          #+#    #+#              #
-#    Updated: 2023/04/12 14:07:30 by rofontai         ###   ########.fr        #
+#    Updated: 2023/04/12 21:30:09 by romain           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,12 +58,11 @@ LIBFT	= $(DIR_LIBFT)/libft.a
 DIR_PRINTF	= ./ft_printf
 PRINTF	= $(DIR_PRINTF)/libftprintf.a
 
-
 # ARGUMENTS--------------------------------------------------------------------
 
 all	:	$(CLIENT) $(SERVER)
 	@echo $G"$$BANNER"$W
-	@echo "\n#-----$C MINITALK already$W ✅---------------#\n"
+	@echo "\n#-----$C MINITALK ready$W ✅---------------#\n"
 
 $(DIR_OBJ)/%.o	:	$(DIR_SRC)/%.c
 	@$(CC) $(CFLAGS) -c $< -o $@
@@ -98,6 +97,8 @@ fclean : clean
 
 re : fclean all
 
-.PHONY: all clean creat fclean re
+bonus : re
+
+.PHONY: all clean creat fclean re bonus
 
 # DIVERS-----------------------------------------------------------------------

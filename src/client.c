@@ -3,19 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rofontai <rofontai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 14:20:02 by romain            #+#    #+#             */
-/*   Updated: 2023/04/12 14:07:12 by rofontai         ###   ########.fr       */
+/*   Updated: 2023/04/12 21:24:46 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minitalk.h"
 
-
-static void f_handler_client(int sign)
+static void	f_handler_client(int sign)
 {
-
 	static t_client	*send;
 
 	send = f_init_client(0, 0);
@@ -29,22 +27,22 @@ static void f_handler_client(int sign)
 			kill(send->pid_s, SIGUSR1);
 		send->bits++;
 		if (send->bits == 8)
-			{
-				send->index++;
-				send->bits = 0;
-				send->len--;
-			}
+		{
+			send->index++;
+			send->bits = 0;
+			send->len--;
+		}
 	}
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	struct sigaction	sa_client;
 	t_client			*send;
 
 	if (argc != 3)
 	{
-		printf( "🚨"R" Error "W": Need arguments ./client <PID> <MESSAGE> \n");
+		printf("🚨"RED" Error : "WHT"Need arguments : ./client <PID> <MESSAGE> \n");
 		exit(EXIT_FAILURE);
 	}
 	send = f_init_client(argv[1], argv[2]);
@@ -53,7 +51,7 @@ int main(int argc, char **argv)
 	sigaction(SIGUSR1, &sa_client, NULL);
 	sigaction(SIGUSR2, &sa_client, NULL);
 	kill(getpid(), SIGUSR2);
-	while(1)
+	while (1)
 		pause();
 	free(send->msg);
 	free(send);

@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rofontai <rofontai@student.42.fr>          +#+  +:+       +#+        */
+/*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 13:47:38 by romain            #+#    #+#             */
-/*   Updated: 2023/04/12 14:23:57 by rofontai         ###   ########.fr       */
+/*   Updated: 2023/04/12 21:26:47 by romain           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minitalk.h"
 
-t_serv *f_init_serv(int pid)
+t_serv	*f_init_serv(int pid)
 {
-	t_serv *init;
+	t_serv	*init;
 
 	init = ft_calloc(sizeof(t_serv), 1);
 	if (!init)
@@ -28,11 +28,11 @@ t_serv *f_init_serv(int pid)
 	return (init);
 }
 
-t_client *f_init_client(char *pid, char *str)
+t_client	*f_init_client(char *pid, char *str)
 {
-	static t_client *init;
+	static t_client	*init;
 
-	if(!init)
+	if (!init)
 	{
 		init = ft_calloc(sizeof(t_client), 1);
 		if (!init)
@@ -47,19 +47,18 @@ t_client *f_init_client(char *pid, char *str)
 	return (init);
 }
 
-void f_msg_received(t_client *sent)
+void	f_msg_received(t_client *sent)
 {
-	printf("Transmission done !\n");
-	printf("%d char sended", sent->index);
+	printf("👍"MAG" Transmission done !"WHT"\n");
 	free(sent->msg);
 	free(sent);
 	exit(EXIT_SUCCESS);
 }
 
-char *f_re_calloc(char *str, int buf)
+char	*f_re_calloc(char *str, int buf)
 {
-	char *new;
-	int i;
+	char	*new;
+	int		i;
 
 	i = 0;
 	new = ft_calloc(sizeof(char), buf);
@@ -75,19 +74,21 @@ char *f_re_calloc(char *str, int buf)
 	return (new);
 }
 
-char *f_stock_char(char *str, char c)
+char	*f_stock_char(char *str, char c)
 {
-	static int i;
-	static	int buff;
+	static int	i;
+	static int	buff;
+	static int	size;
 
 	if (!str)
 	{
 		i = 0;
 		buff = 2;
+		size = 0;
 		str = ft_calloc(sizeof(char), buff);
 	}
 	str[i++] = c;
-	if (i == buff)
+	if (++size == buff)
 	{
 		buff *= 2;
 		str = f_re_calloc(str, buff);
