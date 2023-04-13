@@ -6,7 +6,7 @@
 /*   By: rofontai <rofontai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 14:20:02 by romain            #+#    #+#             */
-/*   Updated: 2023/04/13 10:37:06 by rofontai         ###   ########.fr       */
+/*   Updated: 2023/04/13 10:58:01 by rofontai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	f_error(t_client *send)
 {
-	printf("🚨"RED" Error : \n");
-	printf(WHT"Arguments error\n");
+	ft_printf("🚨"RED" Error : ");
+	ft_printf(WHT"Arguments error\n");
 	free(send->msg);
 	free(send);
 	exit(EXIT_FAILURE);
@@ -57,8 +57,8 @@ int	main(int argc, char **argv)
 
 	if (argc != 3)
 	{
-		printf("🚨"RED" Error : \n");
-		printf(WHT"Need arguments [./client <PID> <MESSAGE>]\n");
+		ft_printf("🚨"RED" Error : ");
+		ft_printf(WHT"Need arguments [./client <PID> <MESSAGE>]\n");
 		exit(EXIT_FAILURE);
 	}
 	send = f_init_client(argv[1], argv[2]);

@@ -6,7 +6,7 @@
 /*   By: rofontai <rofontai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 20:39:08 by romain            #+#    #+#             */
-/*   Updated: 2023/04/13 10:51:01 by rofontai         ###   ########.fr       */
+/*   Updated: 2023/04/13 11:00:22 by rofontai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	f_re_init_pid(t_serv *serv, siginfo_t *info)
 
 static void	f_print_receive(t_serv *serv)
 {
-	printf("%s\n", serv->msg);
+	ft_printf("%s\n", serv->msg);
 	free(serv->msg);
 	serv->msg = NULL;
 	kill(serv->pid_c, SIGUSR1);
