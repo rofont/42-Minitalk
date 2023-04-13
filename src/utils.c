@@ -6,7 +6,7 @@
 /*   By: rofontai <rofontai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 13:47:38 by romain            #+#    #+#             */
-/*   Updated: 2023/04/13 08:07:34 by rofontai         ###   ########.fr       */
+/*   Updated: 2023/04/13 10:44:05 by rofontai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,13 @@ char	*f_stock_char(char *str, char c)
 		i = 0;
 		buff = 2;
 		size = 0;
-		str = ft_calloc(sizeof(char), buff);
+		str = ft_calloc(sizeof(char), buff + 1);
 	}
 	str[i++] = c;
 	if (++size == buff)
 	{
 		buff *= 2;
-		str = f_re_calloc(str, buff);
+		str = f_re_calloc(str, buff + 1);
 	}
 	return (str);
 }

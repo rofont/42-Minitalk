@@ -6,7 +6,7 @@
 #    By: rofontai <rofontai@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/24 16:49:17 by rofontai          #+#    #+#              #
-#    Updated: 2023/04/13 08:09:12 by rofontai         ###   ########.fr        #
+#    Updated: 2023/04/13 10:37:30 by rofontai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ SERVER	= server
 CLIENT	= client
 
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra -Werror -g
 RM		= rm -rf
 
 DIR_SRC	= ./src
@@ -69,10 +69,10 @@ $(DIR_OBJ)/%.o	:	$(DIR_SRC)/%.c
 	@echo "$G Compilation : $Z $(notdir $<)"$W
 
 $(SERVER)	:	$(LIBFT) $(PRINTF) $(OBJ_S)
-	@$(CC) $(OBJ_S) -o $@ $(PRINTF) $(LIBFT) -fsanitize=address
+	@$(CC) $(OBJ_S) -o $@ $(PRINTF) $(LIBFT)
 
 $(CLIENT)	:	$(DIR_OBJ) $(LIBFT) $(PRINTF) $(OBJ_C)
-	@$(CC) $(OBJ_C) -o $@ $(PRINTF) $(LIBFT) -fsanitize=address
+	@$(CC) $(OBJ_C) -o $@ $(PRINTF) $(LIBFT)
 
 
 $(DIR_OBJ) :
