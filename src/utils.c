@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rofontai <rofontai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 13:47:38 by romain            #+#    #+#             */
-/*   Updated: 2023/04/12 21:26:47 by romain           ###   ########.fr       */
+/*   Updated: 2023/04/13 08:07:34 by rofontai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_client	*f_init_client(char *pid, char *str)
 
 void	f_msg_received(t_client *sent)
 {
-	printf("👍"MAG" Transmission done !"WHT"\n");
+	ft_printf("👍"MAG" Transmission done !"WHT"\n");
 	free(sent->msg);
 	free(sent);
 	exit(EXIT_SUCCESS);

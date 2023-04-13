@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rofontai <rofontai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 14:20:02 by romain            #+#    #+#             */
-/*   Updated: 2023/04/12 21:24:46 by romain           ###   ########.fr       */
+/*   Updated: 2023/04/13 08:07:21 by rofontai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 3)
 	{
-		printf("🚨"RED" Error : "WHT"Need arguments : ./client <PID> <MESSAGE> \n");
+		ft_printf("🚨"RED" Error : "WHT"Need arguments : ./client <PID> <MESSAGE> \n");
 		exit(EXIT_FAILURE);
 	}
 	send = f_init_client(argv[1], argv[2]);

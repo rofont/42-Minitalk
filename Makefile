@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: romain <romain@student.42.fr>              +#+  +:+       +#+         #
+#    By: rofontai <rofontai@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/24 16:49:17 by rofontai          #+#    #+#              #
-#    Updated: 2023/04/12 21:30:09 by romain           ###   ########.fr        #
+#    Updated: 2023/04/13 08:09:12 by rofontai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,7 +69,7 @@ $(DIR_OBJ)/%.o	:	$(DIR_SRC)/%.c
 	@echo "$G Compilation : $Z $(notdir $<)"$W
 
 $(SERVER)	:	$(LIBFT) $(PRINTF) $(OBJ_S)
-	@$(CC) $(OBJ_S) -o $@ $(PRINTF) $(LIBFT)
+	@$(CC) $(OBJ_S) -o $@ $(PRINTF) $(LIBFT) -fsanitize=address
 
 $(CLIENT)	:	$(DIR_OBJ) $(LIBFT) $(PRINTF) $(OBJ_C)
 	@$(CC) $(OBJ_C) -o $@ $(PRINTF) $(LIBFT) -fsanitize=address

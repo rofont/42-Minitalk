@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: romain <romain@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rofontai <rofontai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 20:39:08 by romain            #+#    #+#             */
-/*   Updated: 2023/04/12 21:34:29 by romain           ###   ########.fr       */
+/*   Updated: 2023/04/13 08:09:23 by rofontai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static void	f_handler_serv(int sign, siginfo_t *info, void *ucontext_t)
 	static t_serv	*recup;
 
 	(void)ucontext_t;
-	// fflush(stdout);
 	if (!recup)
 		recup = f_init_serv(info->si_pid);
 	if (recup && recup->pid_c != info->si_pid && info->si_pid != 0)
@@ -39,7 +38,7 @@ static void	f_handler_serv(int sign, siginfo_t *info, void *ucontext_t)
 		else
 		{
 			recup->msg = f_stock_char(recup->msg, recup->box);
-			printf("%s\n", recup->msg);
+			ft_printf("%s\n", recup->msg);
 			free(recup->msg);
 			recup->msg = NULL;
 			kill(recup->pid_c, SIGUSR1);
@@ -58,7 +57,7 @@ int	main(int argc, char **argv)
 	(void)argv;
 	if (argc > 1)
 	{
-		printf("🚨"RED" Error : "WHT"No argument needed\n");
+		ft_printf("🚨"RED" Error : "WHT"No argument needed\n");
 		exit(EXIT_FAILURE);
 	}
 	sigemptyset(&sa_serv.sa_mask);
@@ -68,7 +67,7 @@ int	main(int argc, char **argv)
 	sa_serv.sa_sigaction = f_handler_serv;
 	sigaction(SIGUSR1, &sa_serv, NULL);
 	sigaction(SIGUSR2, &sa_serv, NULL);
-	printf(CYA"Le pid est :"GRE" %d"WHT"\n", getpid());
+	ft_printf(CYA"Le pid est :"GRE" %d"WHT"\n", getpid());
 	while (1)
 		pause();
 	return (0);
